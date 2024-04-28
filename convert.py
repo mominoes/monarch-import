@@ -28,16 +28,17 @@ def transform_csv(input_file, month):
     output_data["Date"] = pd.to_datetime(bank_data["Transaction Date"], format='%m/%d/%Y')
     output_data["Merchant"] = bank_data["Description 1"].fillna('') + " " + bank_data["Description 2"].fillna('')
     output_data["Category"] = ""  # Leave blank
-    output_data["Account"] = bank_data["Account Number"].map(transform_account_num)
+    output_data["Account"] = "Overwritten by Monarch"
     output_data["Original Statement"] = output_data["Merchant"]
     output_data["Notes"] = ""  # Leave blank
     output_data["Amount"] = bank_data["CAD$"]
+    output_data["Tags"] = bank_data["Account Number"].map(transform_account_num)
 
     # Keep only transactions for certain month
     output_data = output_data[output_data['Date'].dt.month == month]
 
-    # Filter out unwanted accounts
-    output_data = output_data[output_data['Account'] != ""]
+    # Filter out unwanted accounts (use 'Tags' instead of 'Account', which gets overwritten)
+    output_data = output_data[output_data['Tags'] != ""]
 
     # Print the first few rows of the output DataFrame
     print("\nFirst few rows of the output DataFrame:")
