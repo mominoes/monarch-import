@@ -13,7 +13,7 @@ def transform_account_num(account_num):
         return "RBC MasterCard 4"
     return ""
 
-def transform_csv(input_file, month):
+def transform_csv(input_file, month, output_prefix):
     # Read the input CSV file
     bank_data = pd.read_csv(input_file, index_col=False)
 
@@ -45,7 +45,7 @@ def transform_csv(input_file, month):
     print(output_data.head())
 
     # Write the transformed data to a new CSV file
-    output_file = f"monarch-rbc-{calendar.month_abbr[month]}.csv"
+    output_file = f"{output_prefix}-monarch-{calendar.month_abbr[month]}.csv"
     output_data.to_csv(output_file, index=False)
 
     print("\nTransformation completed. Output saved to:", output_file)
@@ -55,7 +55,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Transform bank data CSV into Monarch Money format")
     parser.add_argument("input_file", help="Path to the input CSV file")
     parser.add_argument("month", type=int, help="Filter transactions by the specified month (1-12)")
+    parser.add_argument("output_prefix", help="Prefix for the output CSV file")
     args = parser.parse_args()
 
     # Call the transform_csv function with provided input and output files
-    transform_csv(args.input_file, args.month)
+    transform_csv(args.input_file, args.month, args.output_prefix)
