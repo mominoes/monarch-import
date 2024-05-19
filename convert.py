@@ -1,6 +1,7 @@
 import argparse
 import calendar
 import pandas as pd
+import os
 
 def transform_account_num(account_num):
     if str.endswith(account_num, "1234567"):
@@ -45,7 +46,8 @@ def transform_csv(input_file, month, output_prefix):
     print(output_data.head())
 
     # Write the transformed data to a new CSV file
-    output_file = f"{output_prefix}-monarch-{calendar.month_abbr[month]}.csv"
+    output_file = f"outputs/{output_prefix}-monarch-{calendar.month_abbr[month]}.csv"
+    os.makedirs("outputs", exist_ok=True)
     output_data.to_csv(output_file, index=False)
 
     print("\nTransformation completed. Output saved to:", output_file)
