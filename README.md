@@ -16,7 +16,7 @@ identical).
 1. Download transaction data from RBC into `./inputs/`
 1. Merge and dedupe multiple files:
    `python3 merge.py ./inputs/momin-rbc.csv ./inputs/csvXXXXX.csv ./inputs/csvXXXXX.csv`
-1. Tailor `transform_account_num()` to your accounts
+1. In [convert.py](./convert.py) `transform_account_num()` to your accounts
 1. Run script: `python3 convert.py ./inputs/<input_filename.csv> 3 momin` (`3` = month of the year;
    `momin` = output file prefix)
 1. Import output CSV file of transactions into Monarch
