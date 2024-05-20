@@ -1,12 +1,21 @@
 # monarch-import
 
-Convert CSV files of bank transactions into Monarch-compatible format. Banks supported so far: RBC
-(CAD$).
+Convert CSV files of RBC bank transactions into a Monarch-compatible format.
 
-Usage instructions:
+## Usage instructions - RBC
 
-1. Download a transactions file from bank
+Start by
+[downloading transaction files](https://www.rbcroyalbank.com/onlinebanking/bankingusertips/accountingsoftware/index.html)
+from your bank. Chequing transactions are available from the past 90-120 days. Credit card
+transactions, on the other hand, are only available up to your last statement (insert rant).
+
+Therefore, it's necessary to (1) download roughly every month, and (2) deduplicate transactions that
+ended up getting downloaded twice.
+
+1. Download transaction data from RBC into `./inputs/`
+1. Merge and dedupe multiple files:
+   `python3 merge.py ./inputs/momin-rbc.csv ./inputs/csvXXXXX.csv ./inputs/csvXXXXX.csv`
 1. Tailor `transform_account_num()` to your accounts
-1. Run script: `python3 convert.py <input_filename.csv> 3 momin-rbc` (`3` = month of the year;
-   `momin-rbc` = output file prefix)
+1. Run script: `python3 convert.py ./inputs/<input_filename.csv> 3 momin` (`3` = month of the year;
+   `momin` = output file prefix)
 1. Import output CSV file of transactions into Monarch
