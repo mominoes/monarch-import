@@ -10,7 +10,8 @@ from your bank. Chequing transactions are available from the past 90-120 days. C
 transactions, on the other hand, are only available up to your last statement (insert rant).
 
 Therefore, it's necessary to (1) download roughly every month, and (2) deduplicate transactions that
-ended up getting downloaded twice.
+ended up getting downloaded twice. (Warning: this will also dedupe real transactions that look
+identical).
 
 1. Download transaction data from RBC into `./inputs/`
 1. Merge and dedupe multiple files:
