@@ -1,5 +1,6 @@
 # input/output dirs
 inputs/*
+merged/*
 outputs/*
 
 # MacOS data
